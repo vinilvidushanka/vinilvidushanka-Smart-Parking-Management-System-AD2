@@ -6,15 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Eureka-Server" />
         <module name="API-Gateway" />
+        <module name="Payment-Service" />
+        <module name="Eureka-Server" />
         <module name="Config-Server" />
+        <module name="ParkingService" />
         <module name="User-Service" />
         <module name="Vehicle-Service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="APIGateway" target="17" />
+      <module name="Parking-Service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -23,6 +26,9 @@
       <module name="APIGateway" options="-parameters" />
       <module name="Config-Server" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
+      <module name="Parking-Service" options="-parameters" />
+      <module name="ParkingService" options="-parameters" />
+      <module name="Payment-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
       <module name="Vehicle-Service" options="-parameters" />
     </option>
