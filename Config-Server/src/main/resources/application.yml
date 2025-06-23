@@ -24,8 +24,8 @@ spring:
       server:
         git:
           uri: https://github.com/vinilvidushanka/vinilvidushanka-Smart-Parking-Management-System-AD2.git
-          clone-on-start: true  # Ensures the repo is cloned on startup
-          default-label: main   # Specify the branch (main/master)
+          clone-on-start: true
+          default-label: main
           username: vinilvidushanka
           password: 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
   application:
