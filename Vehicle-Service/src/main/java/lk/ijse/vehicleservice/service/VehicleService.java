@@ -9,4 +9,6 @@ public interface VehicleService {
     Vehicle addVehicle(VehicleDTO dto);
     List<Vehicle> getAllVehicles();
     List<Vehicle> getVehiclesByUserId(Integer userId);
+    Vehicle updateVehicle(Integer vehicleId, VehicleDTO dto);
+
 }

@@ -14,20 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class VehicleSecurityConfig {
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Use plain NoOpPasswordEncoder for dev only (not recommended)
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/vehicles/**").hasAnyRole("USER", "OWNER")
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
-
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         return http.build();
     }
 }
