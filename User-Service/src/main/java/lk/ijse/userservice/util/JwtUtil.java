@@ -22,8 +22,8 @@ public class JwtUtil {
     public static final long JWT_TOKEN_VALIDITY = 12 * 60 * 60; // 12 hours in seconds
 
     public Key getSigningKey() {
-//        return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
-        return Keys.hmacShaKeyFor(secret.getBytes());
+        return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
+//        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
 
@@ -39,7 +39,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -68,12 +68,26 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }*/
 
-    private Claims extractAllClaims(String token) {
+    /*private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey()) // use decoded key
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }*/
+
+    private Claims extractAllClaims(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            System.err.println("JWT parse error: " + e.getMessage());
+            throw e;  // or return null / custom exception if needed
+        }
     }
+
 
 }
