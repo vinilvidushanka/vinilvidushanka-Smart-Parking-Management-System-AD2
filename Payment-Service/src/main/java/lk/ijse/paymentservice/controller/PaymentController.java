@@ -1,24 +1,49 @@
 package lk.ijse.paymentservice.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import lk.ijse.paymentservice.dto.PaymentDTO;
+import lk.ijse.paymentservice.entity.Payment;
+import lk.ijse.paymentservice.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("api/v1/payments")
 public class PaymentController {
-    private final Map<Integer, String> receipts = new HashMap<>();
+    @Autowired
+    private PaymentService paymentService;
 
-    @PostMapping("/pay")
-    public String pay(@RequestParam int id, @RequestParam double amount) {
-        String receipt = "Paid $" + amount + " for booking " + id;
-        receipts.put(id, receipt);
-        return receipt;
+    // Create payment
+    @PostMapping("/create")
+    public Payment createPayment(@RequestBody PaymentDTO dto) {
+        return paymentService.createPayment(dto);
     }
 
-    @GetMapping("/receipt/{id}")
-    public String getReceipt(@PathVariable int id) {
-        return receipts.getOrDefault(id, "No receipt found");
+    // Get all payments (admin/owner)
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
+    public List<Payment> getAllPayments() {
+        return paymentService.getAllPayments();
+    }
+
+    // Get payment by ID
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
+    public Payment getPaymentById(@PathVariable Integer id) {
+        return paymentService.getPaymentById(id);
+    }
+
+    // Get all payments by user ID
+    @GetMapping("/user/{userId}")
+    @PreAuthorize("hasRole('USER')")
+    public List<Payment> getPaymentsByUser(@PathVariable Integer userId, HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        System.out.println("Token: " + token); // optional logging
+        return paymentService.getPaymentsByUserId(userId);
     }
 }
