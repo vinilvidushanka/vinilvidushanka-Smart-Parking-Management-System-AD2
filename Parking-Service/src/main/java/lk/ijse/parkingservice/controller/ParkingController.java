@@ -21,7 +21,7 @@ public class ParkingController {
     }
 
     // Create new parking space
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<ParkingSpaceDTO> createParkingSpace(@RequestBody ParkingSpaceDTO dto) {
         return ResponseEntity.ok(parkingSpaceService.createParkingSpace(dto));
     }
@@ -41,10 +41,16 @@ public class ParkingController {
     }
 
     // Get all parking spaces
-    @GetMapping
+    /*@GetMapping("/get-all")
     public ResponseEntity<List<ParkingSpaceDTO>> getAllSpaces() {
         return ResponseEntity.ok(parkingSpaceService.getAllParkingSpaces());
+    }*/
+
+    @GetMapping("/all")
+    public List<ParkingSpaceDTO> getAllParkingSpaces() {
+        return parkingSpaceService.getAllParkingSpaces();
     }
+
 
     // Delete parking space by ID
     @DeleteMapping("/{id}")
