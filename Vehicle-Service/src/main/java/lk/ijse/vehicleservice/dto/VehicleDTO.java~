@@ -1,0 +1,8 @@
+package lk.ijse.vehicleservice.dto;
+
+public class VehicleDTO {
+    private Integer userId;
+    private String plateNumber;
+    private String model;
+    private String color;
+}
