@@ -1,3 +1,20 @@
+#server:
+#  port: 8888
+#
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: file:///${user.home}/spms-config-repo
+#  application:
+#    name: config-server
+#
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+
 server:
   port: 8888
 
@@ -6,7 +23,11 @@ spring:
     config:
       server:
         git:
-          uri: file:///${user.home}/spms-config-repo
+          uri: https://github.com/vinilvidushanka/vinilvidushanka-Smart-Parking-Management-System-AD2.git
+          clone-on-start: true  # Ensures the repo is cloned on startup
+          default-label: main   # Specify the branch (main/master)
+          username: vinilvidushanka
+          password: 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
   application:
     name: config-server
 
