@@ -1,6 +1,7 @@
 package lk.ijse.vehicleservice.dto;
 
 public class VehicleDTO {
+    private Integer vehicleId;
     private Integer userId;
     private String plateNumber;
     private String model;
@@ -9,11 +10,20 @@ public class VehicleDTO {
     public VehicleDTO() {
     }
 
-    public VehicleDTO(Integer userId, String plateNumber, String model, String color) {
+    public VehicleDTO(Integer vehicleId, Integer userId, String plateNumber, String model, String color) {
+        this.vehicleId = vehicleId;
         this.userId = userId;
         this.plateNumber = plateNumber;
         this.model = model;
         this.color = color;
+    }
+
+    public Integer getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Integer vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public Integer getUserId() {
