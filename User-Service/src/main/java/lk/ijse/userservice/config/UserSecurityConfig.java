@@ -40,7 +40,7 @@ public class UserSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/users/register").permitAll()
                         .requestMatchers("/api/v1/users/login").permitAll()
-                        .requestMatchers("/api/v1/users/all").hasRole("USER")
+                        .requestMatchers("/api/v1/users/all").permitAll()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -108,7 +108,7 @@ public class UserController {
         return ResponseEntity.ok("User updated successfully");
     }
     @GetMapping("/all")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('OWNER')")
     public List<User> getAllUsers(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         System.out.println("User-Service received Authorization header: " + authHeader);
