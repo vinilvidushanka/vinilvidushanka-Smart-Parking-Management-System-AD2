@@ -65,8 +65,8 @@ public class User {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = String.valueOf(role);
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreatedDate() {

@@ -26,14 +26,14 @@ public class PaymentController {
 
     // Get all payments (admin/owner)
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
+    @PreAuthorize("hasAuthority('OWNER')")
     public List<Payment> getAllPayments() {
         return paymentService.getAllPayments();
     }
 
     // Get payment by ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
+    @PreAuthorize("hasRole('OWNER')")
     public Payment getPaymentById(@PathVariable Integer id) {
         return paymentService.getPaymentById(id);
     }

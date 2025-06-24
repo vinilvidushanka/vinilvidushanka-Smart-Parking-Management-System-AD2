@@ -43,13 +43,24 @@ public class UserServiceImpl implements UserService , UserDetailsService {
         if (userRepo.existsByEmail(dto.getEmail())) {
             return VarList.Not_Acceptable;
         }else {
-            User user = modelMapper.map(dto, User.class);
+            /*User user = modelMapper.map(dto, User.class);
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
             if (user.getRole() == null) {
                 user.setRole(Role.USER);
             }
+            userRepo.save(user);*/
+            User user = modelMapper.map(dto, User.class);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+            if (dto.getRole() == null || dto.getRole().isEmpty()) {
+                user.setRole("USER");
+            } else {
+                user.setRole(dto.getRole().toUpperCase());
+            }
+
             userRepo.save(user);
             return VarList.Created;
         }
